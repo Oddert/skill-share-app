@@ -19,3 +19,11 @@
     justify-content: flex-end;
   }
 }
+
+.temp_warning_box {
+  width: 70vw;
+  margin-left: 50vw;
+  transform: translate(-50%, 0%);
+  border: 1px dashed #bec3c7;
+  padding: 0px 20px;
+}
