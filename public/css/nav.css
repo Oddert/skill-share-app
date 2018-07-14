@@ -1,0 +1,23 @@
+.navigation {
+  display: flex;
+  width: 100vw;
+}
+
+.navigation a {
+  border: 1px solid #DFBEE7;
+  box-shadow: 10px 10px 30px rgba(1, 1, 1, 0.1);
+  border-radius: 4px;
+  padding: 10px;
+  width: 150px;
+  flex: 0 1 150px;
+  transition: 0.2s linear;
+}
+.navigation a:hover {
+  border: 1px solid #8D24AA;
+  box-shadow: 10px 10px 30px rgba(1, 1, 1, 0.3);
+}
+.navigation a.nav-right {
+  justify-content: flex-end;
+}
+
+/*# sourceMappingURL=public/css/nav.css.map */

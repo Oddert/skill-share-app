@@ -1,0 +1,61 @@
+.login_form {
+  width: 50vw;
+  margin-left: 50vw;
+  transform: translateX(-50%);
+  & h1 {
+    text-align: center;
+    margin: 30px 0px;
+  }
+  & form {
+    font-size: 22px;
+    transition: 0.2s linear;
+    color: #2d3e50;
+    & input {
+      width: 100%;
+      border: 1px solid #65B6F7;
+      border-radius: 6px;
+      background-color: white;
+      padding: 5px;
+      margin-bottom: 10px;
+      transition: 0.2s linear;
+      &:focus {
+        border: 1px solid #2397F5;
+        box-shadow: 0px 0px 3px 3px rgba(189,224,252,0.3);
+      }
+    }
+    & button {
+      width: 100%;
+      border: 1px solid #65B6F7;
+      border-radius: 6px;
+      background-color: white;
+      padding: 5px;
+      transition: 0.2s linear;
+      &:hover {
+        border: 1px solid #2397F5;
+        box-shadow: 0px 0px 3px 3px rgba(189,224,252,0.3);
+        background-color: rgba(131,223,236,0.5);
+      }
+      &:active {
+        background-color: rgba(22,102,192,0.5);
+      }
+    }
+  }
+}
+
+.listings_show {
+  width: 80vw;
+  margin-left: 50%;
+  margin-top: 30px;
+  transform: translateX(-50%);
+  border: 3px solid black;
+  border-radius: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .login-form {
+    width: 100vw;
+    margin-left: 0;
+    transform: translateX(0);
+    color: red;
+  }
+}

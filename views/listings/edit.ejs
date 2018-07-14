@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+  <h1>Edit <%= listing.name %></h1>
+  <form action='/listings/<%= listing._id %>?_method=PUT' method='POST'>
+    <input type="text" name="updatedlisting[name]" placeholder="Title" value="<%= listing.name %>" required /> <br />
+    <input type="text" name="updatedlisting[description]" placeholder="Descirption" value="<%= listing.description %>" required /> <br />
+
+    <label for="updatedlisting_type">Type of item: </label> <br />
+    <select name="updatedlisting[listingType]" required id="updatedlisting_type">
+      <option value="resources" selected>Resources</option>
+    </select> <br />
+
+    <label for="updatedlisting_mode">Listing Mode: </label> <br />
+    <select name="updatedlisting[listingMode]" required id="updatedlisting_mode">
+      <option value="offering" selected>I have this item and want to offer it.</option>
+      <option value="requesting">I'm looking for something matching this description.</option>
+    </select> <br />
+
+    <input type='date' name='updatedlisting[deadline]' />
+
+    <button>Create!</button>
+  </form>
+<% include ../partials/footer %>

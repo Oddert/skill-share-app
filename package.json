@@ -1,0 +1,11 @@
+{
+  "name": "skill-share-app",
+  "version": "1.0.0",
+  "description": "An app to coordinate the sharing or resources within a university conteof the Free Code Camp backend challenged (book share app).",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Robyn Veitch",
+  "license": "ISC"
+}

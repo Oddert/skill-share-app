@@ -1,0 +1,63 @@
+<% include ../partials/header %>
+  <% if (currentUser && currentUser._id.equals(user._id)) { %>
+    <h1>Hello <%= user.username %>!</h1>
+  <% } else { %>
+    <h1>View <%= user.username %>'s Listings</h1>
+  <% } %>
+
+  <% user.listings.forEach((each) => { %>
+    <div style="border: 1px solid black;">
+      <a href='/listings/<%= each._id %>'>
+        <h3><%= each.name %> (<%= each.listingType %>)</h3>
+      </a>
+      <p><%= each.description %></p>
+
+      <% if (each.listingMode == 'offering') { %>
+        <p><%= each.author.username %> is looking for someone to accept this offer!</p>
+      <% } else { %>
+        <p>Do you have somehting like this? Contect <%= each.author.username %>!</p>
+      <% } %>
+
+      <% if (each.deadline != '') { %>
+        <h4>User is looking for an offer by <%= each.deadline %></h4>
+      <% } %>
+
+    </div>
+  <% }) %>
+
+  <hr />
+  <h3>Inbound Requests</h3>
+  <% user.proposalsInbound.forEach(each => { %>
+    <% if (!each.hidden && currentUser && currentUser._id.equals(user._id)) { %>
+      <p><%= each.name %></p>
+      <p><%= each.description %></p>
+      <form action='/proposals/<%= each._id %>/accept?_method=PUT' method='POST'>
+        <input type='submit' value='accept' />
+      </form>
+      <form action='/proposals/<%= each._id %>/decline?_method=PUT' method='POST'>
+        <input type='submit' value='decline' />
+      </form>
+    <% } %>
+  <% }) %>
+
+  <hr />
+  <h3>Outbound Offers</h3>
+  <% user.proposalsOutbound.forEach(each => { %>
+    <% if (!each.hidden && currentUser && currentUser._id.equals(user._id)) { %>
+      <h4>To <%= each.targetUser.username %></h4>
+      <p><%= each.name %></p>
+      <p><%= each.description %></p>
+      <a href='/proposals/<%= each._id %>/edit'>Edit this offer</a>
+      <form action="/proposals/<%= each._id %>?_method=DELETE" method="POST">
+        <input name='redir' value='/user/<%= user._id %>' hidden />
+        <button>Retract Request</button>
+      </form>
+    <% } %>
+  <% }) %>
+
+  <!-- <hr />
+  <p><%= currentUser %></p>
+  <hr />
+  <p><%= user %></p> -->
+
+<% include ../partials/footer %>

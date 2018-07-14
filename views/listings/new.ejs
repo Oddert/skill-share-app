@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+  <h1>Create a new listing</h1>
+  <form action='/listings' method='POST'>
+    <input type="text" name="newlisting[name]" placeholder="Title" required /> <br />
+    <input type="text" name="newlisting[description]" placeholder="Descirption" required /> <br />
+
+    <label for="newlisting_type">Type of item: </label> <br />
+    <select name="newlisting[listingType]" required id="newlisting_type">
+      <option value="resources" selected>Resources</option>
+    </select> <br />
+
+    <label for="newlisting_mode">Listing Mode: </label> <br />
+    <select name="newlisting[listingMode]" required id="newlisting_mode">
+      <option value="offering" selected>I have this item and want to offer it.</option>
+      <option value="requesting">I'm looking for something matching this description.</option>
+    </select> <br />
+
+    <input type='date' name='newlisting[deadline]' />
+
+    <button>Create!</button>
+  </form>
+<% include ../partials/footer %>

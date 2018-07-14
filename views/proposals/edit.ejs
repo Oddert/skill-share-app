@@ -1,0 +1,24 @@
+<% include ../partials/header %>
+  <h1>Hi <%= currentUser.username %>! Create a new trade proposal for <%= listing.name %></h1>
+
+  <form action="/proposals/<%= listing._id %>/update?_method=PUT" method="POST">
+    <input type="text" name="updatedprop[name]" placeholder="Title for you proposal message" value="<%= listing.name %>" style="width: 50%;" /> <br />
+    <input type="text" name="updatedprop[description]" placeholder="Add a message for <%= listing.author.username %>" value="<%= listing.description %>" style="width: 50%;" /> <br />
+
+    <label for="updatedprop_counter">I want to offer: </label> <br />
+    <select name="updatedprop[counterOffer]" required id="updatedprop_counter" value="<%= listing.offeredItem._id %>">
+      <option value="create">New option.</option>
+      <% currentUser.listings.forEach(each => { %>
+        <% if (each._id.equals(listing.offeredItem.id)) { %>
+          <option value="<%= each._id %>" selected><%= each.name %></option>
+        <% } else { %>
+          <option value="<%= each._id %>" ><%= each.name %></option>
+        <% } %>
+      <% }) %>
+    </select> <br />
+
+    <input type="text" name="updatedprop[previousOffer]" value="<%= listing.offeredItem.id %>" hidden />
+
+    <button>Submit!</button>
+  </form>
+<% include ../partials/footer %>
