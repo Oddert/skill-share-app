@@ -1,5 +1,6 @@
-var Listing = require('../models/tasks/Listing'),
-    Proposal  = require('../models/Proposal');
+var Listing   = require('../models/tasks/Listing'),
+    Proposal  = require('../models/Proposal'),
+    User      = require('../models/User');
 
 const middleware = {};
 
@@ -60,6 +61,34 @@ middleware.checkProposalTargetUser = (req, res, next) => {
     res.send({
       message: 'You should not have been able to see a method to access this route',
       middleware: 'checkProposalTargetUser'
+    });
+  }
+}
+
+middleware.checkSettings = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    User.findById(req.params.id, (err, foundUser) => {
+      if (err) {
+        console.log(err);
+        res.status(500).json({
+          error: true,
+          message: 'Internal server error at user lookup'
+        });
+      } else {
+        if (foundUser._id.equals(req.user._id)) {
+          return next();
+        } else {
+          res.status(401).json({
+            error: true,
+            message: 'Current user\'s id does not match requested page'
+          });
+        }
+      }
+    })
+  } else {
+    res.status(401).json({
+      error: true,
+      message: 'You are not signed in'
     });
   }
 }

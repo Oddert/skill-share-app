@@ -2,8 +2,16 @@
   <% if (currentUser && currentUser._id.equals(user._id)) { %>
     <h1>Hello <%= user.username %>!</h1>
   <% } else { %>
-    <h1>View <%= user.username %>'s Listings</h1>
+    <h1>View <%= user.username %>'s Profile</h1>
   <% } %>
+
+  <h3><%= user.primaryName %> <%= user.secondaryName %></h3>
+  <p><%= user.bio %></p>
+  <h4>Country: <%= user.country %></h4>
+  <h4>City: <%= user.city %></h4>
+  <h4>Region: <%= user.region %></h4>
+  <hr />
+  <h2>Listings:</h2>
 
   <% user.listings.forEach((each) => { %>
     <div style="border: 1px solid black;">
@@ -55,9 +63,12 @@
     <% } %>
   <% }) %>
 
-  <!-- <hr />
+  <hr />
+  <p>Current User Object:</p>
   <p><%= currentUser %></p>
   <hr />
-  <p><%= user %></p> -->
+  <p>User Object:</p>
+  <p><%= user %></p>
+  <hr />
 
 <% include ../partials/footer %>

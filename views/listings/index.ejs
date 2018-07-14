@@ -1,33 +1,45 @@
 <% include ../partials/header %>
     <script src="js/index.js" type="text/javascript" ></script>
     <link href="css/index.css" type="text/css" rel="stylesheet" />
-    <h1 class="header">View all <span style="text-decoration: line-through;">campgrounds</span> listings!</h1>
+    <!-- <h1 class="header">View all <span style="text-decoration: line-through;">campgrounds</span> listings!</h1> -->
+    <div class='listings_index-container'>
+      <h1 class="header">View all listings</h1>
 
-    <a href='/listings/new'>
-      <h3>Create a new listing!</h3>
-    </a>
+      <a href='/listings/new' class='create_new_listing'>
+        <h3>Create a new listing +</h3>
+      </a>
+    </div>
 
-    <% listings.forEach((each) => { %>
-      <div style="border: 1px solid black;">
-        <h3>
-          <a href="/listings/<%= each._id %>"><%= each.name %></a> (<%= each.listingType %>) -by <em><a href='/user/<%= each.author.username %>'><%= each.author.username %></a></em>
-        </h3>
+    <div class='listings_grid'>
+      <% listings.forEach((each) => { %>
+        <div class='listing'>
+          <a href="/listings/<%= each._id %>">
+            <img src='<%= each.imgs[0].src %>' />
+          </a>
+          <!-- <p><%= each.imgs[0].src %></p> -->
+          <h4>
+            <a href="/listings/<%= each._id %>"><%= each.name %></a> (<%= each.listingType %>)
+          </h4>
+          <h4>
+            -by <em><a href='/user/<%= each.author.username %>'><%= each.author.username %></a></em>
+          </h4>
 
-        <a href="/listings/<%= each._id %>">
-          <p><%= each.description %></p>
-        </a>
+          <!-- <a href="/listings/<%= each._id %>">
+            <p><%= each.description %></p>
+          </a> -->
 
-        <% if (each.listingMode == 'offering') { %>
-          <p><%= each.author.username %> is looking for someone to accept this offer!</p>
-        <% } else { %>
-          <p>Do you have somehting like this? Contact <%= each.author.username %>!</p>
-        <% } %>
+          <% if (each.listingMode == 'offering') { %>
+            <p><%= each.author.username %> is looking for someone to accept this offer!</p>
+          <% } else { %>
+            <p>Do you have somehting like this? Contact <%= each.author.username %>!</p>
+          <% } %>
 
-        <% if (each.deadline) { %>
-          <h4>User is looking for an offer by <%= each.deadline %></h4>
-        <% } %>
+          <!-- <% if (each.deadline) { %>
+            <h4>User is looking for an offer by <%= each.deadline %></h4>
+          <% } %> -->
 
-      </div>
-    <% }); %>
+        </div>
+      <% }); %>
+    </div>
 
 <% include ../partials/footer %>

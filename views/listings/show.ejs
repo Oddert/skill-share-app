@@ -1,114 +1,120 @@
 <% include ../partials/header %>
   <!-- <h2>View an item: </h2> -->
   <link rel='stylesheet' type='text/css' href='/css/index.css' />
-  <div class="listings_show">
+  <div class='listings_show-container'>
+    <div class="listings_show">
 
-    <% if (listing.hidden && listing.hidden == true) { %>
-      <div>
-        <em><%= listing.author.username %>'s inventory item:</em>
-        <h1><strong><%= listing.name %></strong> (<%= listing.listingMode %>)</h1>
-      </div>
-    <% } else if (listing.listingMode == 'offering') { %>
-      <div>
-        <em>I'm looking to sell</em>
-        <h1><strong><%= listing.name %></strong> (<%= listing.listingMode %>)</h1>
-      </div>
-    <% } else { %>
-      <div>
-        <em>Do you have</em>
-        <h1><strong><%= listing.name %></strong>? (<%= listing.listingMode %>)</h1>
-      </div>
-    <% } %>
+      <img src="<%= listing.imgs[0].src %>" class='main_img' />
 
-    <h3>-by <em><a href='/user/<%= listing.author.username %>'><%= listing.author.username %></a></em></h3>
-    <strong>Category: <%= listing.listingType %></strong>
-    <h4>Description: </h4>
-    <p><%= listing.description %></p>
+      <% if (listing.hidden && listing.hidden == true) { %>
+        <div>
+          <h3><em><%= listing.author.username %>'s inventory item:</em></h3>
+          <h1><strong><%= listing.name %></strong> (<%= listing.listingMode %>)</h1>
+        </div>
+      <% } else if (listing.listingMode == 'offering') { %>
+        <div>
+          <h3><em>I'm looking to sell</em></h3>
+          <h1><strong><%= listing.name %></strong> (<%= listing.listingMode %>)</h1>
+        </div>
+      <% } else { %>
+        <div>
+          <h3><em>Do you have</em></h3>
+          <h1><strong><%= listing.name %></strong>? (<%= listing.listingMode %>)</h1>
+        </div>
+      <% } %>
 
-    <% if (listing.deadline) { %>
-      <p>Deadline: <%= listing.deadline %></p>
-    <% } %>
+      <h3>-by <em><a href='/user/<%= listing.author.username %>'><%= listing.author.username %></a></em></h3>
+      <strong>Category: <%= listing.listingType %></strong>
+      <h4>Description: </h4>
+      <p><%= listing.description %></p>
 
-    <% if (listing.imgs) { %>
-      <% listing.imgs.forEach(each => { %>
-        <img src="<%= each.src %>" />
+      <% if (listing.deadline) { %>
+        <p>Deadline: <%= listing.deadline %></p>
+      <% } %>
+
+      <% if (listing.imgs) { %>
+        <% listing.imgs.forEach((each, index) => { %>
+          <% if (!index === 0) { %>
+            <img src="<%= each.src %>" class='additional_imgs' />
+          <% } %>
+        <% }) %>
+      <% } %>
+
+      <% if (currentUser && listing.author.id.equals(currentUser._id)) { %>
+        <div class="UD_routes">
+          <a href='/listings/<%= listing._id %>/edit'>Edit</a>
+          <form
+            action="/listings/<%= listing._id %>?_method=DELETE"
+            method="POST"
+          >
+            <button>Delete</button>
+          </form>
+        </div>
+      <% } %>
+
+      <a href="/proposals/new/<%= listing.id %>" class='new_proposal_button'>Create a new proposal +</a>
+
+      <hr />
+      <h4>Offers for this item: </h4>
+      <% listing.proposalsInbound.forEach((each, index) => { %>
+        <% if (!each.hidden) { %>
+          <a href='/listings/<%= each.offeredItem.id %>'>
+            <p>Proposal from <%= each.author.username %> on <%= each.created %></p>
+          </a>
+        <% } %>
       <% }) %>
-    <% } %>
 
-    <% if (currentUser && listing.author.id.equals(currentUser._id)) { %>
-      <div class="UD_routes">
-        <a href='/listings/<%= listing._id %>/edit'>Edit</a>
-        <form
-          action="/listings/<%= listing._id %>?_method=DELETE"
-          method="POST"
-        >
-          <button>Delete</button>
-        </form>
-      </div>
-    <% } %>
+      <hr />
+      <h4>This item is currently being offered to: </h4>
+      <%console.log('Proposals Inbound: ', listing.proposalsInbound)%>
+      <% listing.proposalsOutbound.forEach((each, index) => { %>
+        <% if (!each.hidden) { %>
+          <a href='/listings/<%= each.targetItem.id %>'>
+            <p>Offered to <%= each.targetUser.username %> on <%= each.created %></p>
+          </a>
+        <% } %>
+      <% }) %>
 
-    <a href="/proposals/new/<%= listing.id %>">Create a new proposal</a>
+      <hr />
+      <h4>Passed trades this offer has gone through: </h4>
+      <% listing.pastTrades.forEach((each, index) => { %>
+        <p>
+          <%=index%>)
+          <a href='/listings/<%= each.targetItem.id %>'>
+            <em><%= each.targetItem.name %></em>
+          </a> traded from
+          <a href='/user/<%= each.targetUser.username %>'>
+            <em><%= each.targetUser.username %></em>
+          </a> for
+          <a href='/listings/<%= each.offeredItem.id %>'>
+            <em><%= each.offeredItem.name %></em>
+          </a> by
+          <a href='/user/<%= each.author.username %>'>
+            <em><%= each.author.username %></em>
+          </a>
+        </p>
+      <% }) %>
 
-    <hr />
-    <h4>Offers for this item: </h4>
-    <% listing.proposalsInbound.forEach((each, index) => { %>
-      <% if (!each.hidden) { %>
-        <a href='/listings/<%= each.offeredItem.id %>'>
-          <p>Proposal from <%= each.author.username %> on <%= each.created %></p>
-        </a>
-      <% } %>
-    <% }) %>
-
-    <hr />
-    <h4>This item is currently being offered to: </h4>
-    <%console.log('Proposals Inbound: ', listing.proposalsInbound)%>
-    <% listing.proposalsOutbound.forEach((each, index) => { %>
-      <% if (!each.hidden) { %>
-        <a href='/listings/<%= each.targetItem.id %>'>
-          <p>Offered to <%= each.targetUser.username %> on <%= each.created %></p>
-        </a>
-      <% } %>
-    <% }) %>
-
-    <hr />
-    <h4>Passed trades this offer has gone through: </h4>
-    <% listing.pastTrades.forEach((each, index) => { %>
-      <p>
-        <%=index%>)
-        <a href='/listings/<%= each.targetItem.id %>'>
-          <em><%= each.targetItem.name %></em>
-        </a> traded from
-        <a href='/user/<%= each.targetUser.username %>'>
-          <em><%= each.targetUser.username %></em>
-        </a> for
-        <a href='/listings/<%= each.offeredItem.id %>'>
-          <em><%= each.offeredItem.name %></em>
-        </a> by
-        <a href='/user/<%= each.author.username %>'>
-          <em><%= each.author.username %></em>
-        </a>
-      </p>
-    <% }) %>
-
-    <hr />
-    <h4>Passed rejected trades: </h4>
-    <% listing.rejectedOffers.forEach((each, index) => { %>
-      <p>
-        <%=index%>)
-        <a href='/user/<%= each.author.username %>'>
-          <em><%= each.author.username %></em>
-        </a> offered
-        <a href='/listings/<%= each.offeredItem.id %>'>
-          <em><%= each.offeredItem.name %></em>
-        </a> to
-        <a href='/user/<%= each.targetUser.username %>'>
-          <em><%= each.targetUser.username %></em>
-        </a> in exchange for
-        <a href='/listings/<%= each.targetItem.id %>'>
-          <em><%= each.targetItem.name %></em>
-        </a>
-      </p>
-    <% }) %>
+      <hr />
+      <h4>Passed rejected trades: </h4>
+      <% listing.rejectedOffers.forEach((each, index) => { %>
+        <p>
+          <%=index%>)
+          <a href='/user/<%= each.author.username %>'>
+            <em><%= each.author.username %></em>
+          </a> offered
+          <a href='/listings/<%= each.offeredItem.id %>'>
+            <em><%= each.offeredItem.name %></em>
+          </a> to
+          <a href='/user/<%= each.targetUser.username %>'>
+            <em><%= each.targetUser.username %></em>
+          </a> in exchange for
+          <a href='/listings/<%= each.targetItem.id %>'>
+            <em><%= each.targetItem.name %></em>
+          </a>
+        </p>
+      <% }) %>
+    </div>
   </div>
 
 <% include ../partials/footer %>

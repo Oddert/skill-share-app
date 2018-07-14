@@ -1,3 +1,7 @@
+.header {
+  margin-top: 70px;
+}
+
 .login_form {
   width: 50vw;
   margin-left: 50vw;
@@ -42,14 +46,117 @@
   }
 }
 
-.listings_show {
-  width: 80vw;
-  margin-left: 50%;
-  margin-top: 30px;
-  transform: translateX(-50%);
-  border: 3px solid black;
-  border-radius: 20px;
+.listings_index-container {
+  text-align: center;
+  & .create_new_listing {
+    border: 2px solid #27ae61;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    border-radius:  20px;
+    margin: 10px 0px 20px 0px;
+    display: inline-block;
+    transition: 0.2s linear;
+    color: #222;
+    & h3 {
+      margin: 0;
+    }
+    &:hover {
+      background-color: #27ae61;
+      color: #ecf0f1;
+      box-shadow: 0px 0px 20px rgba(1,1,1,0.3);
+    }
+    &:active {
+      color: #fff;
+      background-color: #2dcc70;
+      box-shadow: 0px 0px 10px rgba(1,1,1,0.3);
+      border: 2px solid #2dcc70;
+      transform: scale(0.95);
+    }
+  }
 }
+
+
+.listings_show-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: scroll;
+  & .listings_show {
+    text-align: center;
+    width: 80vw;
+    margin-top: 100px;
+    border: 1px solid #bec3c7;
+    box-shadow: 10px 10px 30px rgba(1,1,1,0.3);
+    border-radius: 20px;
+    height: auto;
+    background-color: #fff;
+    margin-bottom: 200px;
+    & .main_img {
+      max-height: 400px;
+      max-width: 100%;
+      border-radius: 20px;
+    }
+    & .additional_imgs {
+      max-height: 100px;
+      max-width: 100%;
+    }
+    & h4:last-child {
+      margin-bottom: 20px;
+    }
+    & .new_proposal_button {
+      border: 2px solid #27ae61;
+      padding: 10px 20px;
+      font-size: 1.1em;
+      border-radius:  20px;
+      margin: 10px 0px 0px 0px;
+      display: inline-block;
+      transition: 0.2s linear;
+      color: #222;
+      &:hover {
+        background-color: #27ae61;
+        color: #ecf0f1;
+        box-shadow: 0px 0px 20px rgba(1,1,1,0.3);
+      }
+      &:active {
+        color: #fff;
+        background-color: #2dcc70;
+        box-shadow: 0px 0px 10px rgba(1,1,1,0.3);
+        border: 2px solid #2dcc70;
+        transform: scale(0.95);
+      }
+    }
+  }
+}
+
+.listings_grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+  margin: 0px 10px;
+  .listing {
+    & img {
+      width: 100%;
+      margin-top: 4px;
+      border-radius: 10px;
+    }
+    padding: 0px 10px;
+    border: 1px solid #bec3c7;
+    border-radius: 20px;
+    box-shadow: 4px 4px 10px rgba(1,1,1,0.1);
+    text-align: center;
+  }
+}
+
+.new_listing_page {
+  margin-top: 70px;
+  text-align: center;
+}
+
 
 
 @media only screen and (min-width: 768px) {

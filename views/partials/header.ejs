@@ -20,6 +20,7 @@
         <a href="/secret">Secret</a>
         <a href="/logout">Logout</a>
         <a href="/user/<%= currentUser.username %>">Profile (<%= currentUser.username %>)</a>
+        <a href="/user/<%= currentUser._id %>/settings">Settings</a>
       <% } else { %>
         <a href="/login" class="nav-right">Login</a>
         <a href="/register" class="nav-right">Sign Up</a>

@@ -1,7 +1,9 @@
-var router    = require('express').Router(),
+const router      = require('express').Router();
 
-    User      = require('../models/User'),
-    Listing   = require('../models/tasks/Listing');
+const User        = require('../models/User'),
+      Listing     = require('../models/tasks/Listing');
+
+const middleware  = require('../middleware');
 
 
 router.get('/:username', (req, res) => {
@@ -21,5 +23,9 @@ router.get('/:username', (req, res) => {
     }
   });
 });
+
+router.get('/:id/settings', middleware.checkSettings, (req, res) => {
+  res.send('Settings page');
+})
 
 module.exports = router;
