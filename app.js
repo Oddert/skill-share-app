@@ -19,7 +19,9 @@ const indexRoutes     = require('./routes'),
 
 const keys            = require('./locals/keys');
 
-mongoose.connect(keys.mongodb.uri);
+require('dotenv').config();
+
+mongoose.connect(process.env.MONGODB);
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
@@ -51,4 +53,4 @@ app.use('/proposals', propRoutes);
 const PORT = process.env.PORT || 3000;
 var date = new Date().toLocaleTimeString();
 
-app.listen(PORT, () => console.log(`${date} Server initialised on port ${PORT}...`));
+app.listen(PORT, () => console.log(`${date} Server initialised on port ${PORT}... ${process.env.TESTER}`));
