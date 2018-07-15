@@ -1,0 +1,32 @@
+<% include ../partials/header %>
+<link href='/css/index.css' type='text/css' rel='stylesheet' />
+<div class='user_settings_page'>
+  <h1>Update your settings, <%= user.primaryName %></h1>
+  <p><%= user %></p>
+  <form action='/user/<%= user._id %>?_method=PUT' method="post">
+    <label for='user_update-primaryName'>First Name:</label>
+    <input type='text' name='updatedUser[primaryName]' value='<%= user.primaryName %>' id='user_update-primaryName'>
+
+    <% if (user.otherNames.length > 0) { %>
+      <label>Middle Names:</label>
+    <% } %>
+    <% user.otherNames.map((each, index) => { %>
+      <input type='text' name='updatedUser[otherNames][<%= index %>]' value='<%= each %>'>
+    <% }); %>
+
+    <label for='user_update-secondaryName'>Second Name:</label>
+    <input type='text' name='updatedUser[secondaryName]' value='<%= user.secondaryName %>' id='user_update-secondaryName'>
+
+    <label for='user_update-country'>Country:</label>
+    <input type='text' name='updatedUser[country]' value='<%= user.country %>' id='user_update-country'>
+
+    <label for='user_update-city'>City:</label>
+    <input type='text' name='updatedUser[city]' value='<%= user.city %>' id='user_update-city'>
+
+    <label for='user_update-region'>Region / state:</label>
+    <input type='text' name='updatedUser[region]' value='<%= user.region %>' id='user_update-region'>
+
+    <button>Update</button>
+  </form>
+</div>
+<% include ../partials/footer %>

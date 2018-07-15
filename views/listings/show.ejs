@@ -14,7 +14,7 @@
       <% } else if (listing.listingMode == 'offering') { %>
         <div>
           <h3><em>I'm looking to sell</em></h3>
-          <h1><strong><%= listing.name %></strong> (<%= listing.listingMode %>)</h1>
+          <h1><strong><%= listing.name %></strong></h1>
         </div>
       <% } else { %>
         <div>
@@ -42,12 +42,12 @@
 
       <% if (currentUser && listing.author.id.equals(currentUser._id)) { %>
         <div class="UD_routes">
-          <a href='/listings/<%= listing._id %>/edit'>Edit</a>
+          <a href='/listings/<%= listing._id %>/edit' class='button-edit'>Edit</a>
           <form
             action="/listings/<%= listing._id %>?_method=DELETE"
             method="POST"
           >
-            <button>Delete</button>
+            <button class='button-delete'>Delete</button>
           </form>
         </div>
       <% } %>

@@ -86,10 +86,7 @@ middleware.checkSettings = (req, res, next) => {
       }
     })
   } else {
-    res.status(401).json({
-      error: true,
-      message: 'You are not signed in'
-    });
+    res.redirect('/login');
   }
 }
 

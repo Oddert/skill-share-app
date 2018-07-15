@@ -25,7 +25,33 @@ router.get('/:username', (req, res) => {
 });
 
 router.get('/:id/settings', middleware.checkSettings, (req, res) => {
-  res.send('Settings page');
+  console.log('User attempting to access settings');
+  console.log(req.params.id);
+  User.findById(req.params.id, (err, foundUser) => {
+    console.log('user lookup');
+    if (err) {
+      console.log(err);
+      res.redirect('/');
+    } else {
+      console.log(foundUser);
+      res.render('user/edit', {user: foundUser});
+    }
+  })
+});
+
+router.put('/:id', (req, res) => {
+  console.log(req.body);
+  //middleNames
+  const update = req.body.updatedUser;
+  User.findByIdAndUpdate(req.params.id, update, (err) => {
+    if (err) {
+      console.log(err);
+      res.redirect('/');
+    } else {
+      res.redirect('/listings');
+    }
+  })
+  // res.send('Going to change user\'s settings...');
 })
 
 module.exports = router;

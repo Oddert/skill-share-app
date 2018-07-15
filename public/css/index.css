@@ -5,6 +5,7 @@
 .login_form {
   width: 50vw;
   margin-left: 50vw;
+  margin-top: 100px;
   transform: translateX(-50%);
 }
 .login_form h1 {
@@ -132,6 +133,53 @@
   transform: scale(0.95);
 }
 
+.button-edit {
+  border: 2px solid #f39c11;
+  background-color: #fff;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border-radius: 20px;
+  margin: 10px 0px 0px 0px;
+  display: inline-block;
+  transition: 0.2s linear;
+  color: #222;
+}
+.button-edit:hover {
+  background-color: #f39c11;
+  color: #ecf0f1;
+  box-shadow: 0px 0px 20px rgba(1, 1, 1, 0.3);
+}
+.button-edit:active {
+  color: #fff;
+  background-color: #f1c40f;
+  box-shadow: 0px 0px 10px rgba(1, 1, 1, 0.3);
+  border: 2px solid #f1c40f;
+  transform: scale(0.95);
+}
+
+.button-delete {
+  border: 2px solid #c1392b;
+  background-color: #c1392b;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border-radius: 20px;
+  margin: 10px 0px 0px 0px;
+  display: inline-block;
+  transition: 0.2s linear;
+  color: #bec3c7;
+}
+.button-delete:hover {
+  color: #fff;
+  box-shadow: 0px 0px 30px rgba(193, 57, 43, 0.6);
+}
+.button-delete:active {
+  color: #fff;
+  background-color: #e84c3d;
+  box-shadow: 0px 0px 10px rgba(1, 1, 1, 0.3);
+  border: 2px solid #e84c3d;
+  transform: scale(0.95);
+}
+
 .listings_grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -152,9 +200,12 @@
 }
 
 .new_listing_page {
-  border: 1px solid red;
   margin-top: 70px;
   text-align: center;
+}
+
+.user_settings_page {
+  margin-top: 100px;
 }
 
 @media only screen and (min-width: 768px) {
