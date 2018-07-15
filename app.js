@@ -17,7 +17,7 @@ const indexRoutes     = require('./routes'),
       userRoutes      = require('./routes/user'),
       propRoutes      = require('./routes/proposals');
 
-const keys            = require('./locals/keys');
+// const keys            = require('./locals/keys');
 //
 require('dotenv').config();
 
