@@ -10,7 +10,7 @@
     "sass": "sass public/css/index.scss public/css/index.css && sass public/css/nav.scss public/css/nav.css"
   },
   "author": "Robyn Veitch",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.0",
     "dotenv": "^6.2.0",
