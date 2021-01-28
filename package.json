@@ -7,7 +7,8 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "sass public/css/index.scss public/css/index.css && sass public/css/nav.scss public/css/nav.css"
+    "sass": "sass public/scss public/css",
+    "sass-watch": "sass --watch public/scss:public/css"
   },
   "author": "Robyn Veitch",
   "license": "MIT",
